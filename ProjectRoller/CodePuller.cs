@@ -87,7 +87,7 @@ namespace ProjectRoller
 			string[] files = Directory.GetFiles(projectName, "*.*", SearchOption.AllDirectories);
 			foreach (string file in files)
 			{
-				if (file.Contains(".git")) continue;
+				if (file.Contains(".git") || Path.GetExtension(file) == ".exe") continue;
 				File.WriteAllText(file,File.ReadAllText(file).Replace(baseName,projectName));
 			}
 		}
