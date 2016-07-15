@@ -32,7 +32,7 @@ namespace ProjectRoller.Test
 		public void GetCodeTest()
 		{
 			CodePuller cp = new CodePuller();
-			cp.GetCode("test1");
+			cp.GetCode("v1","test1");
 		}
 
 	}

@@ -26,28 +26,29 @@ namespace ProjectRoller
 	{
 		static int Main(string[] args)
 		{
-			if (args.Length == 0)
+
+			if (args.Length == 0 || (args[0] != "v1" && args[0] != "v2"))
 			{
 				Usage();
 				return -1;
 			}
-			ValidateArgs(args[0]);
+			ValidateArgs(args);
 
 			CodePuller cp = new CodePuller();
-			cp.GetCode(args[0]);
+			cp.GetCode(args[0], args[1]);
 			return 0;
 		}
 
-		static void ValidateArgs(string arg)
+		static void ValidateArgs(string[] arg)
 		{
-			if (arg.Contains(' '))
+			if (arg[1].Contains(' '))
 				throw new ArgumentException("Project cannot contain spaces");
 		}
 
 		static void Usage()
 		{
-			Console.WriteLine("Usage: ProjectRoller <ProjectName>");
-			Console.WriteLine("Example: ProjectRoller MyCoolProject");
+			Console.WriteLine("Usage: ProjectRoller <v1|v2> <ProjectName>");
+			Console.WriteLine("Example: ProjectRoller v1 MyCoolProject");
 		}
 	}
 }

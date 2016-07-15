@@ -26,14 +26,15 @@ namespace ProjectRoller
 {
 	public class CodePuller
 	{
-		private string baseName = "BaseAspNetAngularUnity";
+		private string baseName, baseNameV1 = "BaseAspNetAngularUnity";
+		private string baseNameV2 = "CoreAspNetAngular";
 
 		public CodePuller()
 		{
 			
 		}
 
-		public string GetCode(string projectName)
+		public string GetCode(string version, string projectName)
 		{
 			if (Directory.Exists(projectName))
 			{
@@ -41,7 +42,15 @@ namespace ProjectRoller
 			}
 			Directory.CreateDirectory(projectName);
 
-			var retval = Repository.Clone("https://github.com/wbsimms/BaseAspNetAngularUnity.git", projectName);
+			var repo = "https://github.com/wbsimms/BaseAspNetAngularUnity.git";
+			baseName = baseNameV1;
+			if (version == "v2")
+			{
+				repo = "https://github.com/wbsimms/CoreAspNetAngular.git";
+				baseName = baseNameV2;
+			}
+
+			var retval = Repository.Clone(repo, projectName);
 			try
 			{
 				Directory.Delete(projectName + "/.git", true);
